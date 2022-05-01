@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+    <div>
+        <p>Information:</p>
+        <table>
+            <tr><td>name: </td> <td>
+                <span th:text="${profile.name_first}"> s</span>
+                <span th:text="${profile.name_middle}"> s</span>
+                <span th:text="${profile.name_last}"> s</span>
+            </td></tr>
+
+            <tr><td>email: </td> <td><span th:text="${profile.email}"> s</span></td></tr>
+            <tr><td>description: </td> <td><span th:text="${profile.description}"> s</span></td></tr>
+
+        </table>
+    </div>
+</body>
+</html>
