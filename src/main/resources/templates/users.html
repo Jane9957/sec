@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <p>Сотрудники:</p>
+    <div name="staff">
+        <ul>
+            <li th:each="profile : ${profilies}">
+                <a th:href="@{/user_profile/} + ${profile.idProfile}" th:text="${profile.idProfile}"></a>:
+                <span th:text="${profile.name_first}"></span>:
+                <span th:text="${profile.name_middle}"></span>:
+                <span th:text="${profile.name_last}"></span>:
 
+                <span th:text="${profile.email}"></span>:
+                <span th:text="${profile.description}"></span>:
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <a th:href="@{/user_create}">Создать пользователя</a>
+    </div>
 </body>
 </html>

@@ -1,30 +1,59 @@
 package app.controllers;
 
+import app.servies.MailSevice;
 import app.servies.ProfileService;
 import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
+//@RestController
 @Controller
 public class ProfileController {
 
     @Autowired
     private ProfileService service;
 
+    @Autowired
+    private MailSevice mailSevice;
+
     @GetMapping("/user_profile/{id}")
-    public String getClientById(Model model, @PathVariable String id) {
-        /*String role = "ROLE_FACTORY";
-        for(GrantedAuthority grantedAuthority : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
-            role = grantedAuthority.getAuthority();
-        }*/
-        Profile profile = service.getProfileById(id);
-        model.addAttribute("profile", profile);
-        //model.addAttribute("role", role);
-        //model.addAttribute("owner", false);
+    public String getProfileById(Model model, @PathVariable String id) {
+
+        model.addAttribute("profile", service.getProfileById(id));
         return "user_profile";
     }
+
+    @GetMapping("/users")
+    public String getProfilies(Model model) {
+
+        model.addAttribute("profilies", service.getProfiles());
+        return "/users";
+    }
+
+    @GetMapping("/user_create")
+    public String createUser(Model model, Profile profile) {
+
+        model.addAttribute("profile", profile);
+        return "user_create";
+    }
+
+    @PostMapping("/user_create")
+    public String createUserPost(Model model, @ModelAttribute("profile") Profile profile) {
+
+        service.createUser(profile);
+        return "redirect:/users";
+
+    }
+
+    /*@GetMapping("/activate/{code}")
+    public String activate(Model model, @PathVariable String code) {
+
+        //boolean isActivated = ProfileService.activateProfile(code);
+
+        return "users";
+    }*/
+
 
 }

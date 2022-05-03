@@ -2,15 +2,17 @@ package app.servies.entities;
 
 public class Profile {
 
-    private int id;
+    private int idProfile;
     private String name_first;
     private String name_middle;
     private String name_last;
     private String email;
     private String description;
 
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
+    private String activationCode;
+
+    public int getIdProfile() {return idProfile;}
+    public void setIdProfile(int idProfile) {this.idProfile = idProfile;}
 
     public String getName_first() {return name_first;}
     public void setName_first(String name_first) {this.name_first = name_first;}
@@ -27,4 +29,6 @@ public class Profile {
     public String getDescription () {return description;}
     public void setDescription(String description) {this.description = description;}
 
+    public String getActivationCode() {return activationCode;}
+    public void setActivationCode(String activationCode) {this.activationCode = activationCode;}
 }
