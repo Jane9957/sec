@@ -23,9 +23,6 @@ public class MailConfig {
     @Value("${spring.mail.port}")
     private int port;
 
-    //@Value("${spring.mail.protocol}")
-    //private String protocol;
-
     @Value("${mail.debug}")
     private String debug;
 
@@ -41,9 +38,7 @@ public class MailConfig {
 
         Properties properties = mailSender.getJavaMailProperties();
 
-        //properties.setProperty("mail.transport.protocol", protocol);
         properties.setProperty("mail.smtp.auth", "true");
-        //properties.setProperty("spring.mail.properties.mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.starttls.enable", "true");
         properties.setProperty("mail.debug", debug);
         properties.setProperty("mail.smtp.host", "smtp.gmail.com");

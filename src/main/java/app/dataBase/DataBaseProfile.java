@@ -10,9 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DataBaseProfile {
@@ -25,9 +23,39 @@ public class DataBaseProfile {
 
         String GET_STAFF_PROFILE = "{ call getProfileById(?) }";
 
+        String GET_URL_ATTAKS_STAFF_PROFILE = "{ call getUrlByIdProfile(?) }";
+        String GET_FORM_ATTAKS_STAFF_PROFILE = "{ call getFormByIdProfile(?) }";
+        String GET_TOTAL_ATTAKS_STAFF_PROFILE = "{ call getTotalByIdProfile(?) }";
+
         CallableStatement callableStatement = connection.prepareCall(GET_STAFF_PROFILE);
+        CallableStatement callableStatement1 = connection.prepareCall(GET_URL_ATTAKS_STAFF_PROFILE);
+        CallableStatement callableStatement2 = connection.prepareCall(GET_FORM_ATTAKS_STAFF_PROFILE);
+        CallableStatement callableStatement3 = connection.prepareCall(GET_TOTAL_ATTAKS_STAFF_PROFILE);
+
         callableStatement.setInt("id", id);
+        callableStatement1.setInt("id", id);
+        callableStatement2.setInt("id", id);
+        callableStatement3.setInt("id", id);
+
         Profile profile = new Profile();
+
+        try (ResultSet resultSet1 = callableStatement1.executeQuery()) {
+            if(resultSet1.next()) {
+                profile.setUrlAttacks(resultSet1.getInt(1));
+            }
+        }
+
+        try (ResultSet resultSet2 = callableStatement2.executeQuery()) {
+            if(resultSet2.next()) {
+                profile.setFormAttacks(resultSet2.getInt(1));
+            }
+        }
+
+        try (ResultSet resultSet3 = callableStatement3.executeQuery()) {
+            if(resultSet3.next()) {
+                profile.setTotalAttacks(resultSet3.getInt(1));
+            }
+        }
 
         try (ResultSet resultSet = callableStatement.executeQuery()) {
             if(resultSet.next()) {
@@ -41,9 +69,9 @@ public class DataBaseProfile {
         } catch (Exception e) {
             throw e;
         }
+
         connection.close();
         return profile;
-
     }
 
     public List<Profile> getProfiles() throws SQLException {
@@ -92,4 +120,5 @@ public class DataBaseProfile {
         Profile profile = new Profile();
         return profile;
     }
+
 }

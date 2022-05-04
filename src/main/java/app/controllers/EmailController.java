@@ -23,6 +23,7 @@ public class EmailController {
     public @ResponseBody
     ResponseEntity sendSimpleEmail(@PathVariable("user-email") String email) {
 
+        //http://localhost:8080/email/simple-email/forgot_passs00@mail.ru
         try {
             mailSevice.send(email, "Welcome", "Hello, dear friend http://localhost:8080/users");
         } catch (MailException mailException) {
@@ -32,17 +33,5 @@ public class EmailController {
 
         return new ResponseEntity<>("Please check your inbox", HttpStatus.OK);
     }
-
-    /*@PostMapping("/message")
-    public String sendEmailMessage () {
-
-        mailSevice.send(
-                "forgot_passs00@mail.ru",
-                "Welcome",
-                "Hello, dear friend http://localhost:8080/users");
-        return "Message sent";
-    }
-    http://localhost:8080/email/simple-email/forgot_passs00@mail.ru
-    */
 
 }

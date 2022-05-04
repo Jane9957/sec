@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Templates</title>
 </head>
 <body>
+<p>Шаблоны:</p>
+<div>
+    <ul>
+        <li th:each="template : ${templates}">
 
+            <span th:text="${template.template_id}"></span>:
+            <span th:text="${template.templateName}"></span>:
+            <span th:text="${template.message}"></span>:
+            <span th:text="${template.description}"></span>:
+            <span th:text="${template.rate}"></span>:
+        </li>
+    </ul>
+</div>
+
+<div>
+    <a th:href="@{/template_create}">Создать шаблон</a>
+</div>
 </body>
 </html>

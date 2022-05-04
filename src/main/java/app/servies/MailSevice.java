@@ -15,6 +15,7 @@ public class MailSevice {
     @Value("${spring.mail.username}")
     private String username;
 
+    // принимать айди юзера + шаблон
     public void send(String emailTo, String subject, String message) {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -27,5 +28,6 @@ public class MailSevice {
         mailSender.send(mailMessage);
 
     }
+    // клик -> отображение страницыХ Х -> в методе: айди, запрос в бд (+1 попался)
 
 }

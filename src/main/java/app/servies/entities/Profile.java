@@ -9,6 +9,10 @@ public class Profile {
     private String email;
     private String description;
 
+    private int urlAttacks;
+    private int formAttacks;
+    private int totalAttacks;
+
     private String activationCode;
 
     public int getIdProfile() {return idProfile;}
@@ -31,4 +35,14 @@ public class Profile {
 
     public String getActivationCode() {return activationCode;}
     public void setActivationCode(String activationCode) {this.activationCode = activationCode;}
+
+    public int getUrlAttacks () {return urlAttacks;}
+    public void setUrlAttacks(int urlAttacks) {this.urlAttacks = urlAttacks;}
+
+    public int getFormAttacks () {return formAttacks;}
+    public void setFormAttacks(int formAttacks) {this.formAttacks = formAttacks;}
+
+    public int getTotalAttacks () {return totalAttacks;}
+    public void setTotalAttacks(int totalAttacks) {this.totalAttacks = totalAttacks;}
+
 }

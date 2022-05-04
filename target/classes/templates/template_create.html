@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+
+<div>Registration
+    <form th:action="@{/template_create}" th:object="${template}" method="post">
+        <table>
+
+            <tr><td>name: </td> <td><input type="text" th:field="*{templateName}"></td></tr>
+            <tr><td>message: </td> <td><input type="text" th:field="*{message}"></td></tr>
+            <tr><td>description: </td> <td><input type="text" th:field="*{description}"></td></tr>
+            <tr><td>rate: </td> <td><input type="text" th:field="*{rate}"></td></tr>
+
+            <tr><td><button type="submit">Submit</button></td></tr>
+        </table>
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -37,7 +37,6 @@ public class ProfileService {
         try {
             profile = dataBaseProfile.getProfileById(Integer.valueOf(id));
 
-
             /*profile.setActivationCode(UUID.randomUUID().toString());
             String message = String.format(
             "Hello, %s \n" +
