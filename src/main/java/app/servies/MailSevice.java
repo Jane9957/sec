@@ -4,13 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Map;
 
 @Service
 public class MailSevice {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private SpringTemplateEngine templateEngine;
+
+    @Autowired
+    private SpringTemplateEngine thymeleafTemplateEngine;
 
     @Value("${spring.mail.username}")
     private String username;
@@ -28,6 +41,27 @@ public class MailSevice {
         mailSender.send(mailMessage);
 
     }
-    // клик -> отображение страницыХ Х -> в методе: айди, запрос в бд (+1 попался)
+    // клик -> отображение страницыХ Х -> в методе: айди, запрос в бд (+1 попався)
+
+
+    public void sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        helper.setFrom(username);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(htmlBody, true);
+        mailSender.send(message);
+    }
+
+    public void sendMessageUsingThymeleafTemplate(String to, String subject, Map<String, Object> templateModel) throws MessagingException {
+        Context thymeleafContext = new Context();
+        thymeleafContext.setVariables(templateModel);
+        String htmlBody =
+                thymeleafTemplateEngine.process("0.html", thymeleafContext);
+        sendHtmlMessage(to, subject, htmlBody);
+
+
+    }
 
 }

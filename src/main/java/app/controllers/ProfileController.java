@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 @Controller
 public class ProfileController {
@@ -23,8 +22,6 @@ public class ProfileController {
     @GetMapping("/user_profile/{id}")
     public String getProfileById(Model model, @PathVariable String id) throws MalformedURLException {
 
-        URL url = new URL("http://localhost:8080/user_profile/" + id);
-        System.out.println("путь: " + url.getPath());
         model.addAttribute("profile", service.getProfileById(id));
         return "user_profile";
     }

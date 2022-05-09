@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<p>Сотрудники:</p>
+<!--<div name="staff">
+    <ul>
+        <li th:each="profile : ${profilies}">
+            <a th:href="@{/user_profile/} + ${profile.idProfile}" th:text="${profile.idProfile}"></a>:
+            <span th:text="${profile.name_first}"></span>:
+            <span th:text="${profile.name_middle}"></span>:
+            <span th:text="${profile.name_last}"></span>:
+
+            <span th:text="${profile.email}"></span>:
+            <span th:text="${profile.description}"></span>:
+        </li>
+    </ul>
+</div>-->
+
+<div name="staff">
+    <form th:action="@{/attack_create}" th:object="${profilies}" method="post">
+        <ul>
+            <li th:each="profile : ${profilies}">
+
+                <input type="checkbox" th:value="${profile.idProfile}" name="ids"/>
+
+
+                <!--<input type="checkbox" th:field="*{profile.idProfile}" th:value="${profile.idProfile}" />-->
+
+                <!--<input type="checkbox" th:field="*{profile.idProfile}">-->
+                <!--<a th:href="@{/user_profile/} + ${profile.idProfile}" th:text="${profile.idProfile}"></a>:-->
+
+                <span th:text="${profile.name_first}"></span>:
+                <span th:text="${profile.name_middle}"></span>:
+                <span th:text="${profile.name_last}"></span>:
+
+                <span th:text="${profile.email}"></span>:
+                <span th:text="${profile.description}"></span>:
+            </li>
+        </ul>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    <!--<a th:href="@{/user_create}">Создать пользователя</a>-->
+</div>
+</body>
+</html>

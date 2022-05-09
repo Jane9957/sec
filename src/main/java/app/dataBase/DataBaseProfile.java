@@ -78,7 +78,7 @@ public class DataBaseProfile {
         List<Profile> list = new ArrayList<>();
         Connection connection = src.getConnection();
 
-        String GET_STAFF_PROFILES = "{call getProfiles() }";
+        String GET_STAFF_PROFILES = "{call getProfiles() }"; //добавить вывод доп полей для пользователей
 
         CallableStatement callableStatement = connection.prepareCall(GET_STAFF_PROFILES);
 

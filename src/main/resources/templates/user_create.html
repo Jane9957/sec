@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<div>Registration
-    <form th:action="@{/user_create}" th:object="${profile}" method="post">
+<div th:object="${profile}">Registration
+    <form th:action="@{/user_create}" method="post">
         <table>
 
             <tr><td>name: </td> <td>

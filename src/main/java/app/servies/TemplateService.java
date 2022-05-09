@@ -1,6 +1,7 @@
-package app.servies.entities;
+package app.servies;
 
 import app.dataBase.DataBaseTemplate;
+import app.servies.entities.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
