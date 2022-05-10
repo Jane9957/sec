@@ -7,7 +7,7 @@ public class Attack {
     private int attack_id;
     private String attackName;
     private int template_id;
-    private Date date;
+    private String date;
 
     private int attack_id1;
     private int user_id;
@@ -29,8 +29,8 @@ public class Attack {
     public int getTemplate_id() { return template_id; }
     public void setTemplate_id(int template_id) { this.template_id = template_id; }
 
-    public Date getDate() { return date; }
-    public void setDate(Date date) { this.date = date; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
 
     public String getSuccess_type1() { return success_type1; }
     public void setSuccess_type1(String success_type1) { this.success_type1 = success_type1; }

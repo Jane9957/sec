@@ -3,6 +3,7 @@ package app.controllers;
 import app.servies.AttackService;
 import app.servies.MailSevice;
 import app.servies.ProfileService;
+import app.servies.TemplateService;
 import app.servies.entities.Attack;
 import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class AttackController {
     private ProfileService profileService;
 
     @Autowired
-    private MailSevice mailSevice;
+    private TemplateService template;
+
 
     @GetMapping("/attacks")
     public String getAttacks(Model model) {
@@ -47,32 +49,19 @@ public class AttackController {
 
         //model.addAttribute("profilies", profileService.getProfiles());
 
+        model.addAttribute("templates", template.getTemplates());
         model.addAttribute("attack", attack);
         return "attack_create";
     }
 
     @PostMapping("/attack_create")
-    public String createAttackPost(Model model, @ModelAttribute("attack") Attack attack, @RequestParam(value="ids") List<String> ids) throws SQLException, MessagingException {
+    public String createAttackPost(Model model, @ModelAttribute("attack") Attack attack,
+                                   @RequestParam(value="ids") List<String> ids,
+                                   @RequestParam(value="rd") int rd)
+            throws SQLException, MessagingException {
 
-        attackService.createAttack(attack, ids);
+        attackService.createAttack(attack, ids, rd);
 
-        //список шаблонов
-
-        /*List<Profile> profiles = new ArrayList<>();
-        profiles = profileService.getProfiles();
-
-        List<Profile> checks_profiles = new ArrayList<>();
-
-        for (int i = 0; i < ids.size(); i++) { //поиск нужных значений и заполнение списка checks_profiles
-            int id = Integer.parseInt(ids.get(i));
-            for (Profile profile : profiles) {
-                if (profile.getIdProfile() == id){
-                    checks_profiles.add(profile);
-                }
-            }
-        }*/
-
-        //attackService.createAttack(attack);
         return "redirect:/attack_create";
     }
 

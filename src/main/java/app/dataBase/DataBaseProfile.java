@@ -25,7 +25,7 @@ public class DataBaseProfile {
 
         String GET_URL_ATTAKS_STAFF_PROFILE = "{ call getUrlByIdProfile(?) }";
         String GET_FORM_ATTAKS_STAFF_PROFILE = "{ call getFormByIdProfile(?) }";
-        String GET_TOTAL_ATTAKS_STAFF_PROFILE = "{ call getTotalByIdProfile(?) }";
+        String GET_TOTAL_ATTAKS_STAFF_PROFILE = "{ call getTotalByIdProfile(?) }"; //доработать логику
 
         CallableStatement callableStatement = connection.prepareCall(GET_STAFF_PROFILE);
         CallableStatement callableStatement1 = connection.prepareCall(GET_URL_ATTAKS_STAFF_PROFILE);
@@ -59,11 +59,12 @@ public class DataBaseProfile {
 
         try (ResultSet resultSet = callableStatement.executeQuery()) {
             if(resultSet.next()) {
-                profile.setName_first(resultSet.getString("name_first"));
-                profile.setName_middle(resultSet.getString("name_middle"));
-                profile.setName_last(resultSet.getString("name_last"));
-                profile.setEmail(resultSet.getString("email"));
-                profile.setDescription((resultSet.getString("description")));
+                profile.setIdProfile(resultSet.getInt(1));
+                profile.setName_first(resultSet.getString(2));
+                profile.setName_middle(resultSet.getString(3));
+                profile.setName_last(resultSet.getString(4));
+                profile.setEmail(resultSet.getString(5));
+                profile.setDescription(resultSet.getString(6));
                 System.out.println(profile);
             }
         } catch (Exception e) {
@@ -114,11 +115,6 @@ public class DataBaseProfile {
 
         callableStatement.execute();
         connection.close();
-    }
-
-    public Profile findByActivationCode(String code) {
-        Profile profile = new Profile();
-        return profile;
     }
 
 }

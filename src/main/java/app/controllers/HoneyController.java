@@ -1,7 +1,7 @@
 package app.controllers;
 
 import app.servies.AttackService;
-import app.servies.entities.Attack;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,27 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.SQLException;
+
 @Controller
 public class HoneyController {
 
     @Autowired
     private AttackService attackService;
 
-    @GetMapping("/honey/{id}")
-    public String honey(Model model, @PathVariable String id, Attack attack) {
+    @GetMapping("/honey/{id_attack}/{id_user}")
+    public String honey(Model model, @PathVariable String id_attack, @PathVariable String id_user) throws SQLException {
 
-        model.addAttribute("id_honey", id);
+        model.addAttribute("id_attack", id_attack);
+        model.addAttribute("id_user", id_user);
 
-        attackService.update1(attack); //атака, где id_user и id_attack сделать TRUE в succes_1
+        attackService.update1(Integer.parseInt(id_attack), Integer.parseInt(id_user));
 
         return "honey";
     }
 
-    @PostMapping("/honey/{id}")
-    public String honeyPost(@PathVariable String id, Attack attack) {
+    @PostMapping("/honey/{id_attack}/{id_user}")
+    public String honeyPost(@PathVariable String id_attack, @PathVariable String id_user) throws SQLException {
 
-        System.out.println(id);
-        attackService.update2(attack); //атака, где id_user и id_attack сделать TRUE в succes_2
+        attackService.update2(Integer.parseInt(id_attack), Integer.parseInt(id_user));
 
         //URL url = new URL("http://localhost:8080/honey/" + id);
         //System.out.println("путь: " + url.getPath());

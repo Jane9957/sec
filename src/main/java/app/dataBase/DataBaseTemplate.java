@@ -61,4 +61,29 @@ public class DataBaseTemplate {
         connection.close();
     }
 
+    public Template getTemplateById(int template_id) throws SQLException {
+        Connection connection = src.getConnection();
+
+        String GET_TEMPLATE_BY_ID = "{ call getTemplateById(?) }";
+        CallableStatement callableStatement = connection.prepareCall(GET_TEMPLATE_BY_ID);
+
+        callableStatement.setInt("template_id", template_id);
+
+        Template template = new Template();
+
+        try (ResultSet resultSet = callableStatement.executeQuery()) {
+            if(resultSet.next()) {
+                template.setTemplateName(resultSet.getString(2));
+                template.setSubject(resultSet.getString(3));
+                template.setMessage(resultSet.getString(4));
+                template.setDescription(resultSet.getString(5));
+                template.setRate((resultSet.getFloat(6)));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        connection.close();
+        return template;
+    }
 }

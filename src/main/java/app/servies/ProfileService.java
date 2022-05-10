@@ -18,36 +18,10 @@ public class ProfileService {
     @Autowired
     private DataBaseProfile dataBaseProfile;
 
-    @Autowired
-    private MailSevice mailSevice;
-
-    /*public boolean activateProfile(String code) {
-
-        Profile profile = dataBaseProfile.findByActivationCode(code);
-
-        if (profile == null) {
-            return false;
-        }
-
-        //profile.setActivationCode(null);
-
-
-        return true;
-    }*/
-
     public Profile getProfileById(String id) {
         Profile profile = new Profile();
         try {
             profile = dataBaseProfile.getProfileById(Integer.valueOf(id));
-
-            /*profile.setActivationCode(UUID.randomUUID().toString());
-            String message = String.format(
-            "Hello, %s \n" +
-                    "Visit next link: http://localhost:8080/activate/%s",
-                    profile.getName_first(),
-                    profile.getActivationCode()
-            );
-            mailSender.send(profile.getEmail(), "Activation Code", message);*/
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

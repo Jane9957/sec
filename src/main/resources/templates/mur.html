@@ -6,9 +6,7 @@
 </head>
 <body>
     <div>
-        <p>http://localhost:8080/honey/<span th:text="${id_template}"></span>/<span th:text="${id_profile}"></span></p>
-        <p><a th:href="@{http://localhost:8080/honey/} + ${id_template/} + ${id_profile}" class="btn btn-primary">Validate Account</a></p>
-
+        <p><a th:href="${h} + ${id_last_attack} + ${hh} + ${id_profile}">Validate Account</a></p>
     </div>
 </body>
 </html>

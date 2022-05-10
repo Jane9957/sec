@@ -58,7 +58,7 @@ public class MailSevice {
         Context thymeleafContext = new Context();
         thymeleafContext.setVariables(templateModel);
         String htmlBody =
-                thymeleafTemplateEngine.process("0.html", thymeleafContext);
+                thymeleafTemplateEngine.process("mur.html", thymeleafContext);
         sendHtmlMessage(to, subject, htmlBody);
 
 

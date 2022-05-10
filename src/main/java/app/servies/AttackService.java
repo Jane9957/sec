@@ -2,6 +2,7 @@ package app.servies;
 
 import app.dataBase.DataBaseAttack;
 import app.dataBase.DataBaseProfile;
+import app.dataBase.DataBaseTemplate;
 import app.servies.entities.Attack;
 import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class AttackService {
     private DataBaseProfile dataBaseProfile;
 
     @Autowired
+    private DataBaseTemplate dataBaseTemplate;
+
+    @Autowired
     private MailSevice mailSevice;
 
     public List<Attack> getAttacks() {
@@ -34,38 +38,42 @@ public class AttackService {
         return attacks;
     }
 
-    public void createAttack(Attack attack, List<String> ids) throws SQLException, MessagingException {
+    public void createAttack(Attack attack, List<String> ids, int rd) throws SQLException, MessagingException {
 
-        //dataBaseAttack.createAttack(attack);
-        //int id_last_attack = dataBaseAttack.getLastCreateAttack();
+        attack.setTemplate_id(rd);
+        dataBaseAttack.createAttack(attack);
+        int id_last_attack = dataBaseAttack.getLastCreateAttack();
 
         for (int i = 0; i < ids.size(); i++) {
-            int id_profile = Integer.parseInt(ids.get(i));
-            //dataBaseAttack.createAttackUsers(id_last_attack, id_profile);
+            Integer id_profile = Integer.parseInt(ids.get(i));
 
-            ////ссылка id_last_attack + id_profile
+            dataBaseAttack.createAttackUsers(id_last_attack, id_profile);
 
-            // email = getEmailByIdUser
-            String email = "forgot_passs00@mail.ru";
-            String subject = "Hello";
+            String email = dataBaseProfile.getProfileById(id_profile).getEmail();
+            //String email = "forgot_passs00@mail.ru";
 
+            String subject = dataBaseTemplate.getTemplateById(attack.getTemplate_id()).getSubject();
+            //String subject = "Hello";
+
+            //ссылка http://localhost:8080/honey/(id_last_attack)/(id_profile)
             Map<String, Object> templateModel = new HashMap<>();
+            templateModel.put("h", "http://localhost:8080/honey/");
+            templateModel.put("id_last_attack", id_last_attack);
+            templateModel.put("hh", "/");
             templateModel.put("id_profile", id_profile);
-            //templateModel.put("id_template", attack.getTemplate_id());
-            templateModel.put("id_template", id_profile);
-            // добавить имя пользователя
+        //добавить имя пользователя
 
             mailSevice.sendMessageUsingThymeleafTemplate(email, subject, templateModel);
+        //добавить возможность выбора шаблона (странички) по id_template
 
         }
     }
 
-    public void update1(Attack attack) {
-        dataBaseAttack.update1(attack);
-
+    public void update1(int id_attack, int id_user) throws SQLException {
+        dataBaseAttack.update1(id_attack, id_user);
     }
 
-    public void update2(Attack attack) {
-        dataBaseAttack.update2(attack);
+    public void update2(int id_attack, int id_user) throws SQLException {
+        dataBaseAttack.update2(id_attack, id_user);
     }
 }

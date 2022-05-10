@@ -19,7 +19,7 @@ public class DataBaseAttack {
         List<Attack> list = new ArrayList<>();
         Connection connection = src.getConnection();
 
-        String GET_ATTACKS = "{call getAttacks() }"; //создать
+        String GET_ATTACKS = "{ call getAttacks() }";
 
         CallableStatement callableStatement = connection.prepareCall(GET_ATTACKS);
 
@@ -29,7 +29,7 @@ public class DataBaseAttack {
                 attack.setAttack_id(resultSet.getInt(1));
                 attack.setAttackName(resultSet.getString(2));
                 attack.setTemplate_id(resultSet.getInt(3));
-                attack.setDate(resultSet.getDate(4));
+                attack.setDate(resultSet.getString(4));
                 list.add(attack);
             }
         }
@@ -43,25 +43,23 @@ public class DataBaseAttack {
 
         Connection connection = src.getConnection();
 
-        String CREATE_ATTACK = "{call createAttack(?, ?, ?) }"; //создать
+        String CREATE_ATTACK = "{ call createAttack(?, ?) }";
 
         CallableStatement callableStatement = connection.prepareCall(CREATE_ATTACK);
 
         callableStatement.setString("attack_name", attack.getAttackName());
         callableStatement.setInt("template_id", attack.getTemplate_id());
-        callableStatement.setDate("date", (Date) attack.getDate());
 
         callableStatement.execute();
         connection.close();
 
     }
 
-    //промежуточная функция получения id
     public int getLastCreateAttack() throws SQLException {
 
         Connection connection = src.getConnection();
 
-        String GET_LAST_ATTACK = "{call getLastCreateAttack() }"; //создать
+        String GET_LAST_ATTACK = "{ call getLastCreateAttack() }";
 
         CallableStatement callableStatement = connection.prepareCall(GET_LAST_ATTACK);
 
@@ -75,26 +73,51 @@ public class DataBaseAttack {
         return id_last_attack;
     }
 
-    public void createAttackUsers(int id_last_attack, int id_user) throws SQLException { //переписать
+    public void createAttackUsers(int id_last_attack, int id_user) throws SQLException {
 
         Connection connection = src.getConnection();
 
-        String CREATE_ATTACK_USERS = "{call createAttackUsers(?, ?) }"; //создать
+        String CREATE_ATTACK_USERS = "{ call createAttackUsers(?, ?) }";
 
         CallableStatement callableStatement = connection.prepareCall(CREATE_ATTACK_USERS);
+
         callableStatement.setInt("attack_id", id_last_attack);
-        callableStatement.setInt("user_id", id_user); //
-        //callableStatement.setString("success_type1", attack.getSuccess_type1());
-        //callableStatement.setString("success_type2", attack.getSuccess_type2());
+        callableStatement.setInt("user_id", id_user);
 
         callableStatement.execute();
         connection.close();
 
     }
 
-    public void update1(Attack attack) { //атака, где id_user и id_attack сделать TRUE в succes_1
+    public void update1(int id_attack, int id_user) throws SQLException {
+
+        Connection connection = src.getConnection();
+
+        String UPDATE_ATTACK_USERS_1 = "{ call updateAttackUsers1(?, ?) }";
+
+        CallableStatement callableStatement = connection.prepareCall(UPDATE_ATTACK_USERS_1);
+
+        callableStatement.setInt("attack_id", id_attack);
+        callableStatement.setInt("user_id", id_user);
+
+        callableStatement.execute();
+        connection.close();
+
     }
 
-    public void update2(Attack attack) { //атака, где id_user и id_attack сделать TRUE в succes_2
+    public void update2(int id_attack, int id_user) throws SQLException {
+
+        Connection connection = src.getConnection();
+
+        String UPDATE_ATTACK_USERS_2 = "{ call updateAttackUsers2(?, ?) }";
+
+        CallableStatement callableStatement = connection.prepareCall(UPDATE_ATTACK_USERS_2);
+
+        callableStatement.setInt("attack_id", id_attack);
+        callableStatement.setInt("user_id", id_user);
+
+        callableStatement.execute();
+        connection.close();
+
     }
 }

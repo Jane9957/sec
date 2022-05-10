@@ -7,10 +7,10 @@
 <body>
 
 <div>Registration
-    <form th:action="@{/honey/} + ${id_honey}"  method="post">
+    <form th:action="@{/honey/} + ${id_attack} + @{/} + ${id_user}"  method="post">
         <table>
 
-            <tr><td>hidden: </td> <td><span th:text="${id_honey}"> s</span></td></tr>
+            <!--<tr><td>hidden: </td> <td><span th:text="${id_honey}"> s</span></td></tr>-->
             <tr><td>name: </td> <td><input type="text"></td></tr>
             <tr><td>message: </td> <td><input type="text"></td></tr>
             <tr><td>description: </td> <td><input type="text"></td></tr>
