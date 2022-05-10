@@ -31,9 +31,10 @@ public class DataBaseTemplate {
                 Template template = new Template();
                 template.setTemplate_id(resultSet.getInt(1));
                 template.setTemplateName(resultSet.getString(2));
-                template.setMessage(resultSet.getString(3));
-                template.setDescription(resultSet.getString(4));
-                template.setRate(resultSet.getFloat(5));
+                template.setSubject(resultSet.getString(3));
+                template.setMessage(resultSet.getString(4));
+                template.setDescription(resultSet.getString(5));
+                template.setRate(resultSet.getFloat(6));
                 list.add(template);
 
             }
@@ -51,6 +52,7 @@ public class DataBaseTemplate {
 
         CallableStatement callableStatement = connection.prepareCall(REGISTRATION_QUERY);
         callableStatement.setString("templateName", template.getTemplateName());
+        callableStatement.setString("subject", template.getSubject());
         callableStatement.setString("message", template.getMessage());
         callableStatement.setString("description", template.getDescription());
         callableStatement.setFloat("rate", template.getRate());

@@ -4,6 +4,7 @@ public class Template {
 
     private int template_id;
     private String templateName;
+    private String subject;
     private String message;
     private String description;
     private float rate;
@@ -23,4 +24,6 @@ public class Template {
     public float getRate() { return rate; }
     public void setRate(float rate) { this.rate = rate; }
 
+    public String getSubject() { return subject; }
+    public void setSubject(String subject) { this.subject = subject; }
 }
