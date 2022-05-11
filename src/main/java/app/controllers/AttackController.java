@@ -9,12 +9,10 @@ import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,15 @@ public class AttackController {
 
         model.addAttribute("attacks", attackService.getAttacks());
         return "attacks";
+    }
 
+    @GetMapping("/attack_profile/{id}")
+    public String getAttackById(Model model, @PathVariable String id) throws MalformedURLException, SQLException {
+
+        model.addAttribute("attack", attackService.getAttackById(id)); //одна атака
+        model.addAttribute("attacks", attackService.getAttacksUsersById(id)); //много пользователей
+        model.addAttribute("id_attack", id);
+        return "attack_profile";
     }
 
     @GetMapping("/attack_create")

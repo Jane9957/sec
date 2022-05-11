@@ -4,7 +4,6 @@ import app.dataBase.DataBaseAttack;
 import app.dataBase.DataBaseProfile;
 import app.dataBase.DataBaseTemplate;
 import app.servies.entities.Attack;
-import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,5 +74,27 @@ public class AttackService {
 
     public void update2(int id_attack, int id_user) throws SQLException {
         dataBaseAttack.update2(id_attack, id_user);
+    }
+
+    public Attack getAttackById(String id) throws SQLException {
+        Attack attack = new Attack();
+        try {
+            attack = dataBaseAttack.getAttackById(Integer.valueOf(id));
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return attack;
+    }
+
+    public List<Attack> getAttacksUsersById(String id) throws SQLException {
+        List<Attack> attacks = new ArrayList<>();
+        try {
+            attacks = dataBaseAttack.getAttacksUsersById(Integer.valueOf(id));
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return attacks;
     }
 }

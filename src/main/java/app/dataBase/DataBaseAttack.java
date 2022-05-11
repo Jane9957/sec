@@ -1,6 +1,7 @@
 package app.dataBase;
 
 import app.servies.entities.Attack;
+import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -119,5 +120,58 @@ public class DataBaseAttack {
         callableStatement.execute();
         connection.close();
 
+    }
+
+    public Attack getAttackById(Integer id) throws SQLException {
+
+        Connection connection = src.getConnection();
+
+        String GET_ATTACK = "{ call getAttackById(?) }";
+
+        CallableStatement callableStatement = connection.prepareCall(GET_ATTACK);
+        callableStatement.setInt("attack_id", id);
+
+        Attack attack = new Attack();
+
+        try (ResultSet resultSet = callableStatement.executeQuery()) {
+            if(resultSet.next()) {
+                attack.setAttack_id(resultSet.getInt(1));
+                attack.setAttackName(resultSet.getString(2));
+                attack.setTemplate_id(resultSet.getInt(3));
+                attack.setDate(resultSet.getString(4));
+                //добавить имя шаблона + имя пользователя
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        connection.close();
+        return attack;
+    }
+
+    public List<Attack> getAttacksUsersById(Integer id) throws SQLException {
+        List<Attack> list = new ArrayList<>();
+        Connection connection = src.getConnection();
+
+        String GET_ATTACK = "{call getAttacksUsersById(?) }";
+
+        CallableStatement callableStatement = connection.prepareCall(GET_ATTACK);
+        callableStatement.setInt("attack_id", id);
+
+        try (ResultSet resultSet = callableStatement.executeQuery()) {
+            while (resultSet.next()) {
+                Attack attack = new Attack();
+                attack.setUser_id(resultSet.getInt(2));
+                attack.setSuccess_type1(resultSet.getString(3));
+                attack.setSuccess_type2(resultSet.getString(4));
+                attack.setName_first(resultSet.getString(5));
+                attack.setName_last(resultSet.getString(6));
+                list.add(attack);
+            }
+        }
+        callableStatement.execute();
+        connection.close();
+
+        return list;
     }
 }

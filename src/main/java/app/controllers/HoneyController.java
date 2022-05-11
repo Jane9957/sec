@@ -33,9 +33,6 @@ public class HoneyController {
 
         attackService.update2(Integer.parseInt(id_attack), Integer.parseInt(id_user));
 
-        //URL url = new URL("http://localhost:8080/honey/" + id);
-        //System.out.println("путь: " + url.getPath());
-
         return "redirect:/users"; //редирект на форму с памяткой
 
     }

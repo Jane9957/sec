@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile attack</title>
+</head>
+<body>
+<div>
+    <p>Information:</p>
+    <div>
+        <span th:text="${id_attack}"></span>
+        <ul>
+            <li th:each="attack : ${attacks}">
+                <!--<a th:href="@{/attack_profile/} + ${attack.attack_id}" th:text="${attack.attack_id}"></a>:-->
+                <span th:text="${attack.user_id}"></span>:
+                <span th:text="${attack.success_type1}"></span>:
+                <span th:text="${attack.success_type2}"></span>:
+                <span th:text="${attack.name_first}"></span>:
+                <span th:text="${attack.name_last}"></span>:
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

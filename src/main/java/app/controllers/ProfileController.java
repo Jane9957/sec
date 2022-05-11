@@ -47,14 +47,4 @@ public class ProfileController {
         return "redirect:/users";
 
     }
-
-    /*@GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code) {
-
-        //boolean isActivated = ProfileService.activateProfile(code);
-
-        return "users";
-    }*/
-
-
 }
