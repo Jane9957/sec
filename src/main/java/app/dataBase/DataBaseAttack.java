@@ -137,7 +137,8 @@ public class DataBaseAttack {
             if(resultSet.next()) {
                 attack.setAttack_id(resultSet.getInt(1));
                 attack.setAttackName(resultSet.getString(2));
-                attack.setTemplate_id(resultSet.getInt(3));
+                //attack.setTemplate_id(resultSet.getInt(3));
+                attack.setTemplate_name(resultSet.getString(3));
                 attack.setDate(resultSet.getString(4));
                 //добавить имя шаблона + имя пользователя
             }

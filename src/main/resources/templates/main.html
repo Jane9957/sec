@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main</title>
 </head>
 <body>
-
+<div>
+    <p>Information:</p>
+    <div>
+        <table>
+            <tr><td>Всего атак: </td> <td><span th:text="${statistic.AttackTotal}"> s</span></td></tr>
+            <tr><td>Всего атаковано пользователей: </td> <td><span th:text="${statistic.AttackedUsersTotal}"> s</span></td></tr>
+            <tr><td>Перешли по ссылке: </td> <td><span th:text="${statistic.AttackedUsersURL}"> s</span></td></tr>
+            <tr><td>Попались на форму: </td> <td><span th:text="${statistic.AttackedUsersForm}"> s</span></td></tr>
+        </table>
+    </div>
+</div>
 </body>
 </html>

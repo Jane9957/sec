@@ -17,6 +17,11 @@ public class Attack {
     private String name_first;
     private String name_last;
 
+    private String template_name;
+
+    public String getTemplate_name() { return template_name; }
+    public void setTemplate_name(String template_name) { this.template_name = template_name; }
+
     public String getName_first() { return name_first; }
     public void setName_first(String name_first) { this.name_first = name_first; }
 

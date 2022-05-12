@@ -8,15 +8,21 @@
 <div>
     <p>Information:</p>
     <div>
-        <span th:text="${id_attack}"></span>
+        <div th:object="${attack}">
+            <span th:text="${attack.attack_id}"></span>:
+            <span th:text="${attack.attackName}"></span>:
+            <span th:text="${attack.template_name}"></span>:
+            <span th:text="${attack.date}"></span>
+        </div>
         <ul>
             <li th:each="attack : ${attacks}">
                 <!--<a th:href="@{/attack_profile/} + ${attack.attack_id}" th:text="${attack.attack_id}"></a>:-->
                 <span th:text="${attack.user_id}"></span>:
-                <span th:text="${attack.success_type1}"></span>:
-                <span th:text="${attack.success_type2}"></span>:
-                <span th:text="${attack.name_first}"></span>:
+                <span th:text="${attack.name_first}"></span>
                 <span th:text="${attack.name_last}"></span>:
+                <span th:text="${attack.success_type1}"></span>:
+                <span th:text="${attack.success_type2}"></span>
+
             </li>
         </ul>
     </div>
