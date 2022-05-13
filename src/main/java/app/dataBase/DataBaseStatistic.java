@@ -9,6 +9,9 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class DataBaseStatistic {
@@ -84,6 +87,40 @@ public class DataBaseStatistic {
         return statistic.getAttackedUsersForm();
     }
 
-//количество users(TRUE)/users_total, date по id_attack
+    public Map<String, Float> getPercentLast5AttacksURL() throws SQLException {
+        Map<String, Float> map = new TreeMap<>();
+        Connection connection = src.getConnection();
+
+        String GET_PERCENT_LAST_5_ATTACK_URL = "{call getStatisticLast5AttackURL() }";
+
+        CallableStatement callableStatement = connection.prepareCall(GET_PERCENT_LAST_5_ATTACK_URL);
+        try (ResultSet resultSet = callableStatement.executeQuery()) {
+            while (resultSet.next()) {
+                map.put(resultSet.getString(1), resultSet.getFloat(2));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return map;
+    }
+
+    public Map<String, Float> getPercentLast5AttacksForm() throws SQLException {
+        Map<String, Float> map = new HashMap<>();
+        Connection connection = src.getConnection();
+
+        String GET_PERCENT_LAST_5_ATTACK_FORM = "{call getStatisticLast5AttackForm() }";
+
+        CallableStatement callableStatement = connection.prepareCall(GET_PERCENT_LAST_5_ATTACK_FORM);
+        try (ResultSet resultSet = callableStatement.executeQuery()) {
+            while (resultSet.next()) {
+                map.put(resultSet.getString(1), resultSet.getFloat(2));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return map;
+    }
 
 }

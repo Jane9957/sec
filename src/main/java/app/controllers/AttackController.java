@@ -1,7 +1,6 @@
 package app.controllers;
 
 import app.servies.AttackService;
-import app.servies.MailSevice;
 import app.servies.ProfileService;
 import app.servies.TemplateService;
 import app.servies.entities.Attack;
@@ -38,7 +37,7 @@ public class AttackController {
     }
 
     @GetMapping("/attack_profile/{id}")
-    public String getAttackById(Model model, @PathVariable String id) throws MalformedURLException, SQLException {
+    public String getAttackById(Model model, @PathVariable String id) throws SQLException {
 
         model.addAttribute("attack", attackService.getAttackById(id)); //одна атака
         model.addAttribute("attacks", attackService.getAttacksUsersById(id)); //много пользователей
