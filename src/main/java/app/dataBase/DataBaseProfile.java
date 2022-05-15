@@ -25,7 +25,7 @@ public class DataBaseProfile {
 
         String GET_URL_ATTAKS_STAFF_PROFILE = "{ call getUrlByIdProfile(?) }";
         String GET_FORM_ATTAKS_STAFF_PROFILE = "{ call getFormByIdProfile(?) }";
-        String GET_TOTAL_ATTAKS_STAFF_PROFILE = "{ call getTotalByIdProfile(?) }"; //доработать логику
+        String GET_TOTAL_ATTAKS_STAFF_PROFILE = "{ call getTotalByIdProfile(?) }"; // лучше все переписать по отдкльным функциям, но потом (:
 
         CallableStatement callableStatement = connection.prepareCall(GET_STAFF_PROFILE);
         CallableStatement callableStatement1 = connection.prepareCall(GET_URL_ATTAKS_STAFF_PROFILE);

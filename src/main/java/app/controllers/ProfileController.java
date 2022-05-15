@@ -1,6 +1,5 @@
 package app.controllers;
 
-import app.servies.MailSevice;
 import app.servies.ProfileService;
 import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,19 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.MalformedURLException;
-
 @Controller
 public class ProfileController {
 
     @Autowired
     private ProfileService service;
 
-    @Autowired
-    private MailSevice mailSevice;
-
     @GetMapping("/user_profile/{id}")
-    public String getProfileById(Model model, @PathVariable String id) throws MalformedURLException {
+    public String getProfileById(Model model, @PathVariable String id) {
 
         model.addAttribute("profile", service.getProfileById(id));
         return "user_profile";

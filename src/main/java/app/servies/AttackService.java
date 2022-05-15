@@ -54,17 +54,18 @@ public class AttackService {
             String subject = dataBaseTemplate.getTemplateById(attack.getTemplate_id()).getSubject();
             //String subject = "Hello";
 
-            //ссылка http://localhost:8080/honey/(id_last_attack)/(id_profile)
+            String templateMail = "templateMail" + rd + ".html";
+
+            //ссылка http://localhost:8080/template(rd)/(id_last_attack)/(id_profile)
             Map<String, Object> templateModel = new HashMap<>();
-            templateModel.put("h", "http://localhost:8080/honey/");
+            templateModel.put("h", "http://localhost:8080/template");
+            templateModel.put("id_template", rd);
             templateModel.put("id_last_attack", id_last_attack);
             templateModel.put("hh", "/");
             templateModel.put("id_profile", id_profile);
-        //добавить имя пользователя
+            //добавить имя пользователя
 
-            mailSevice.sendMessageUsingThymeleafTemplate(email, subject, templateModel);
-        //добавить возможность выбора шаблона (странички) по id_template
-
+            mailSevice.sendMessageUsingThymeleafTemplate(email, subject, templateModel, templateMail);
         }
     }
 
@@ -76,7 +77,7 @@ public class AttackService {
         dataBaseAttack.update2(id_attack, id_user);
     }
 
-    public Attack getAttackById(String id) throws SQLException {
+    public Attack getAttackById(String id) {
         Attack attack = new Attack();
         try {
             attack = dataBaseAttack.getAttackById(Integer.valueOf(id));
@@ -87,7 +88,7 @@ public class AttackService {
         return attack;
     }
 
-    public List<Attack> getAttacksUsersById(String id) throws SQLException {
+    public List<Attack> getAttacksUsersById(String id) {
         List<Attack> attacks = new ArrayList<>();
         try {
             attacks = dataBaseAttack.getAttacksUsersById(Integer.valueOf(id));

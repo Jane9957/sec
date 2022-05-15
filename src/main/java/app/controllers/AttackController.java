@@ -11,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import java.net.MalformedURLException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,7 +24,7 @@ public class AttackController {
     private ProfileService profileService;
 
     @Autowired
-    private TemplateService template;
+    private TemplateService templateService;
 
 
     @GetMapping("/attacks")
@@ -37,7 +35,7 @@ public class AttackController {
     }
 
     @GetMapping("/attack_profile/{id}")
-    public String getAttackById(Model model, @PathVariable String id) throws SQLException {
+    public String getAttackById(Model model, @PathVariable String id) {
 
         model.addAttribute("attack", attackService.getAttackById(id)); //одна атака
         model.addAttribute("attacks", attackService.getAttacksUsersById(id)); //много пользователей
@@ -48,21 +46,21 @@ public class AttackController {
     @GetMapping("/attack_create")
     public String createAttack(Model model, Attack attack) {
 
-        List<Profile> profiles = new ArrayList<>();
+        List<Profile> profiles;
         profiles = profileService.getProfiles();
         model.addAttribute("profilies", profiles);
 
         //model.addAttribute("profilies", profileService.getProfiles());
 
-        model.addAttribute("templates", template.getTemplates());
+        model.addAttribute("templates", templateService.getTemplates());
         model.addAttribute("attack", attack);
         return "attack_create";
     }
 
     @PostMapping("/attack_create")
-    public String createAttackPost(Model model, @ModelAttribute("attack") Attack attack,
-                                   @RequestParam(value="ids") List<String> ids,
-                                   @RequestParam(value="rd") int rd)
+    public String createAttackPost(@ModelAttribute("attack") Attack attack,
+                                   @RequestParam(value = "ids") List<String> ids,
+                                   @RequestParam(value = "rd") int rd)
             throws SQLException, MessagingException {
 
         attackService.createAttack(attack, ids, rd);

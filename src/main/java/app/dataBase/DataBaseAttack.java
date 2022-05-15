@@ -1,7 +1,6 @@
 package app.dataBase;
 
 import app.servies.entities.Attack;
-import app.servies.entities.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

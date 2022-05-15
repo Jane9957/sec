@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -30,7 +29,7 @@ public class StatisticService {
     }
 
     public Map<String, Float> getPercentLast5AttacksURL() {
-        Map<String, Float> map = new HashMap<>();
+        Map<String, Float> map = new TreeMap<>();
         try {
             map = dataBaseStatistic.getPercentLast5AttacksURL();
         } catch (Exception e) {
@@ -52,7 +51,7 @@ public class StatisticService {
     public Map<String, Integer> getPieChart() {
         Map<String, Integer> map = new TreeMap<>();
         try {
-            map.put("URL", dataBaseStatistic.getAttackedUserForm());
+            map.put("URL", dataBaseStatistic.getAttackedUserURL());
             map.put("FORM", dataBaseStatistic.getAttackedUserForm());
         } catch (Exception e) {
             e.printStackTrace();

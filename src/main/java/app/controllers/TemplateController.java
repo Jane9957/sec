@@ -1,6 +1,6 @@
 package app.controllers;
 
-import app.dataBase.DataBaseTemplate;
+import app.servies.TemplateService;
 import app.servies.entities.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,18 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.sql.SQLException;
-
 @Controller
 public class TemplateController {
 
     @Autowired
-    private DataBaseTemplate dataBaseTemplate;
+    private TemplateService templateService;
 
     @GetMapping("/templates")
-    public String getTemplates(Model model) throws SQLException {
+    public String getTemplates(Model model) {
 
-        model.addAttribute("templates", dataBaseTemplate.getTemplates());
+        model.addAttribute("templates", templateService.getTemplates());
         return "/templates";
     }
 
@@ -32,9 +30,9 @@ public class TemplateController {
     }
 
     @PostMapping("/template_create")
-    public String createUserPost(Model model, @ModelAttribute("template") Template template) throws SQLException {
+    public String createUserPost(@ModelAttribute("template") Template template) {
 
-        dataBaseTemplate.createTemplate(template);
+        templateService.createTemplate(template);
         return "redirect:/templates";
 
     }

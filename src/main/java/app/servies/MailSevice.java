@@ -20,15 +20,11 @@ public class MailSevice {
     private JavaMailSender mailSender;
 
     @Autowired
-    private SpringTemplateEngine templateEngine;
-
-    @Autowired
     private SpringTemplateEngine thymeleafTemplateEngine;
 
     @Value("${spring.mail.username}")
     private String username;
 
-    // принимать айди юзера + шаблон
     public void send(String emailTo, String subject, String message) {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -41,8 +37,6 @@ public class MailSevice {
         mailSender.send(mailMessage);
 
     }
-    // клик -> отображение страницыХ Х -> в методе: айди, запрос в бд (+1 попався)
-
 
     public void sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
@@ -54,14 +48,11 @@ public class MailSevice {
         mailSender.send(message);
     }
 
-    public void sendMessageUsingThymeleafTemplate(String to, String subject, Map<String, Object> templateModel) throws MessagingException {
+    public void sendMessageUsingThymeleafTemplate(String to, String subject, Map<String, Object> templateModel, String templateMail) throws MessagingException {
         Context thymeleafContext = new Context();
         thymeleafContext.setVariables(templateModel);
-        String htmlBody =
-                thymeleafTemplateEngine.process("mur.html", thymeleafContext);
+        String htmlBody = thymeleafTemplateEngine.process(templateMail, thymeleafContext);
         sendHtmlMessage(to, subject, htmlBody);
-
-
     }
 
 }

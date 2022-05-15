@@ -9,7 +9,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -106,7 +105,7 @@ public class DataBaseStatistic {
     }
 
     public Map<String, Float> getPercentLast5AttacksForm() throws SQLException {
-        Map<String, Float> map = new HashMap<>();
+        Map<String, Float> map = new TreeMap<>();
         Connection connection = src.getConnection();
 
         String GET_PERCENT_LAST_5_ATTACK_FORM = "{call getStatisticLast5AttackForm() }";

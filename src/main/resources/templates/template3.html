@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Honey</title>
+</head>
+<body>
+
+<div>Registration
+    <form th:action="@{/template3/} + ${id_attack} + @{/} + ${id_user}"  method="post">
+        <table>
+
+            <!--<tr><td>hidden: </td> <td><span th:text="${id_honey}"> s</span></td></tr>-->
+            <tr><td>name: </td> <td><input type="text"></td></tr>
+            <tr><td>message: </td> <td><input type="text"></td></tr>
+            <tr><td>description: </td> <td><input type="text"></td></tr>
+            <tr><td>rate: </td> <td><input type="text"></td></tr>
+
+            <tr><td><button type="submit">Submit</button></td></tr>
+        </table>
+    </form>
+
+</div>
+
+</body>
+</html>

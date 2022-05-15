@@ -1,7 +1,5 @@
 package app.servies.entities;
 
-import java.util.Date;
-
 public class Attack {
 
     private int attack_id;
@@ -9,7 +7,6 @@ public class Attack {
     private int template_id;
     private String date;
 
-    private int attack_id1;
     private int user_id;
     private String success_type1;
     private String success_type2;
@@ -27,9 +24,6 @@ public class Attack {
 
     public String getName_last() { return name_last; }
     public void setName_last(String name_last) { this.name_last = name_last; }
-
-    public int getAttack_id1() { return attack_id1; }
-    public void setAttack_id1(int attack_id1) { this.attack_id1 = attack_id1; }
 
     public int getAttack_id() { return attack_id; }
     public void setAttack_id(int attack_id) { this.attack_id = attack_id; }

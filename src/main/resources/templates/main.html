@@ -1,12 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 <div>
-    <p>Information:</p>
+    <p>Информация:</p>
+    <div id="pie_chart" style="width: 500px; height: 500px;"></div>
     <div>
         <table>
             <tr><td>Всего атак: </td> <td><span th:text="${statistic.AttackTotal}"> s</span></td></tr>
@@ -15,6 +18,72 @@
             <tr><td>Попались на форму: </td> <td><span th:text="${statistic.AttackedUsersForm}"> s</span></td></tr>
         </table>
     </div>
+    <p>Последние 5 атак:</p>
+    <div id="curve_chart_URL"></div>
+    <div id="curve_chart_Form"></div>
 </div>
+<script th:inline="javascript">
+    var data_pie = /*[[${chartDataPie}]]*/'noValue';
+    var data_URL = /*[[${chartDataURL}]]*/'noValue';
+    var data_Form = /*[[${chartDataForm}]]*/'noValue';
+
+    $(document).ready(function() {
+        google.charts.load('current', {
+            packages : [ 'corechart', 'bar' ]
+        });
+        google.charts.setOnLoadCallback(drawPieChart);
+        google.charts.setOnLoadCallback(drawLineChartURL);
+        google.charts.setOnLoadCallback(drawLineChartForm);
+    });
+
+    function drawPieChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Percent');
+        data.addColumn('number', 'Views');
+        Object.keys(data_pie).forEach(function(key) {
+            data.addRow([ key, data_pie[key] ]);
+        });
+        var options = {
+            title : 'URL/Form statistic'
+        };
+        var chart = new google.visualization.PieChart(document
+            .getElementById('pie_chart'));
+        chart.draw(data, options);
+    }
+
+    function drawLineChartURL() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'дата атаки');
+        data.addColumn('number', '% попавшихся пользователей');
+        Object.keys(data_URL).forEach(function(key) {
+            data.addRow([ key, data_URL[key] ]);
+        });
+        var options = {
+            title : 'Перешли по ссылке',
+            /*hAxis : { title : 'дата атаки', },
+            vAxis : { title : '% попавшихся пользователей' }*/
+        };
+        var chart = new google.visualization.LineChart(document
+            .getElementById('curve_chart_URL'));
+        chart.draw(data, options);
+    }
+
+    function drawLineChartForm() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'дата атаки');
+        data.addColumn('number', '% попавшихся пользователей');
+        Object.keys(data_Form).forEach(function(key) {
+            data.addRow([ key, data_Form[key] ]);
+        });
+        var options = {
+            title : 'Заполнили форму',
+            /*hAxis : { title : 'дата атаки', },
+            vAxis : { title : '% попавшихся пользователей' }*/
+        };
+        var chart = new google.visualization.LineChart(document
+            .getElementById('curve_chart_Form'));
+        chart.draw(data, options);
+    }
+</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class TemplateService {
         return templates;
     }
 
-    public void createTemplate(Template template) throws SQLException {
+    public void createTemplate(Template template) {
         try {
             dataBaseTemplate.createTemplate(template);
         } catch (Exception e) {

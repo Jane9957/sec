@@ -13,8 +13,6 @@ public class Profile {
     private int formAttacks;
     private int totalAttacks;
 
-    private String activationCode;
-
     public int getIdProfile() {return idProfile;}
     public void setIdProfile(int idProfile) {this.idProfile = idProfile;}
 
@@ -32,9 +30,6 @@ public class Profile {
 
     public String getDescription () {return description;}
     public void setDescription(String description) {this.description = description;}
-
-    public String getActivationCode() {return activationCode;}
-    public void setActivationCode(String activationCode) {this.activationCode = activationCode;}
 
     public int getUrlAttacks () {return urlAttacks;}
     public void setUrlAttacks(int urlAttacks) {this.urlAttacks = urlAttacks;}
