@@ -5,22 +5,71 @@
     <title>Main</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-<div>
-    <p>Информация:</p>
-    <div id="pie_chart" style="width: 500px; height: 500px;"></div>
-    <div>
-        <table>
-            <tr><td>Всего атак: </td> <td><span th:text="${statistic.AttackTotal}"> s</span></td></tr>
-            <tr><td>Всего атаковано пользователей: </td> <td><span th:text="${statistic.AttackedUsersTotal}"> s</span></td></tr>
-            <tr><td>Перешли по ссылке: </td> <td><span th:text="${statistic.AttackedUsersURL}"> s</span></td></tr>
-            <tr><td>Попались на форму: </td> <td><span th:text="${statistic.AttackedUsersForm}"> s</span></td></tr>
-        </table>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/main">main</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/users">staff</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/attacks">attack</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/templates">template</a>
+                </li>
+            </ul>
+        </div>
+</nav>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header"><p>Основаня информация</p></div>
+        <div class="card-body"><div class="users">
+            <div class="row align-items-center">
+                <div class="col" id="pie_chart" style="width: 400px; height: 400px;"></div>
+
+                <div class="col-md-4 col-md-auto">
+                    <table class="table table-borderless table-sm">
+                        <tbody>
+                            <tr>
+                                <td>Всего атак: </td>
+                                <td class="flex-items-xs-center text-center"><span th:text="${statistic.AttackTotal}"> s</span></td>
+                            </tr>
+                            <tr>
+                                <td>Всего атаковано пользователей: </td>
+                                <td class="flex-items-xs-center text-center"><span th:text="${statistic.AttackedUsersTotal}"> s</span></td>
+                            </tr>
+                            <tr>
+                                <td>Перешли по ссылке: </td>
+                                <td class="flex-items-xs-center text-center"><span th:text="${statistic.AttackedUsersURL}"> s</span></td>
+                            </tr>
+                            <tr>
+                                <td>Попались на форму: </td>
+                                <td class="flex-items-xs-center text-center"><span th:text="${statistic.AttackedUsersForm}"> s</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div></div>
     </div>
-    <p>Последние 5 атак:</p>
-    <div id="curve_chart_URL"></div>
-    <div id="curve_chart_Form"></div>
+    <div class="card">
+        <div class="card-header"><p>Последние 5 атак</p></div>
+            <div class="card-body"><div class="users">
+                <div class="chart" id="curve_chart_URL"></div>
+                <div class="chart" id="curve_chart_Form"></div>
+            </div></div>
+    </div><
+
 </div>
 <script th:inline="javascript">
     var data_pie = /*[[${chartDataPie}]]*/'noValue';
@@ -44,7 +93,7 @@
             data.addRow([ key, data_pie[key] ]);
         });
         var options = {
-            title : 'URL/Form statistic'
+            title : ' '
         };
         var chart = new google.visualization.PieChart(document
             .getElementById('pie_chart'));

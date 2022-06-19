@@ -3,24 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Templates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-<p>Шаблоны:</p>
-<div>
-    <ul>
-        <li th:each="template : ${templates}">
 
-            <span th:text="${template.template_id}"></span>:
-            <span th:text="${template.templateName}"></span>:
-            <span th:text="${template.message}"></span>:
-            <span th:text="${template.description}"></span>:
-            <span th:text="${template.rate}"></span>:
-        </li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/main">main</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/users">staff</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/attacks">attack</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/templates">template</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <p>Шаблоны</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col" class="flex-items-xs-center text-center">#</th>
+                    <th scope="col">название</th>
+                    <th scope="col">описание</th>
+                    <th scope="col">рейтинг</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="template : ${templates}">
+                    <th scope="row" class="flex-items-xs-center text-center" style="color: black;">
+                        <!--<a href="/templateMail1" th:text="${template.template_id}" class="blackcolor"></a>-->
+                        <span th:text="${template.template_id}"></span>
+                    </th>
+                    <td><span th:text="${template.templateName}">></span></td>
+                    <td><span th:text="${template.description}"></span></td>
+                    <td><span th:text="${template.rate}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<div>
-    <a th:href="@{/template_create}">Создать шаблон</a>
-</div>
 </body>
 </html>

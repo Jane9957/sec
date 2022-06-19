@@ -2,26 +2,76 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Users</title>
+    <title>Сотрудники</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-    <p>Сотрудники:</p>
-    <div name="staff">
-        <ul>
-            <li th:each="profile : ${profilies}">
-                <a th:href="@{/user_profile/} + ${profile.idProfile}" th:text="${profile.idProfile}"></a>:
-                <span th:text="${profile.name_first}"></span>:
-                <span th:text="${profile.name_middle}"></span>:
-                <span th:text="${profile.name_last}"></span>:
 
-                <span th:text="${profile.email}"></span>:
-                <span th:text="${profile.description}"></span>:
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/main">main</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/users">staff</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/attacks">attack</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/templates">template</a>
             </li>
         </ul>
     </div>
+</nav>
 
-    <div>
-        <a th:href="@{/user_create}">Создать пользователя</a>
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-10">
+                    <p>Сотрудники</p>
+                </div>
+                <div class="col-md-1" style="text-align: right;">
+                    <a th:href="@{/user_create}" class="color">Создать</a>
+                </div>
+                <div class="col-md-1" style="text-align: right;">
+                    <a href="#" class="color">Удалить</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="flex-items-xs-center text-center">#</th>
+                        <th scope="col">ФИО</th>
+                        <th scope="col">электронная почта</th>
+                        <th scope="col">описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="profile : ${profilies}">
+                        <th scope="row" class="flex-items-xs-center text-center" style="color: black;">
+                            <a th:href="@{/user_profile/} + ${profile.idProfile}" th:text="${profile.idProfile}" class="blackcolor"></a>
+                        </th>
+                        <td>
+                            <span th:text="${profile.name_first}"></span>
+                            <span th:text="${profile.name_middle}"></span>
+                            <span th:text="${profile.name_last}"></span>
+                        </td>
+                        <td><span th:text="${profile.email}"></span></td>
+                        <td><span th:text="${profile.description}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 </body>
 </html>

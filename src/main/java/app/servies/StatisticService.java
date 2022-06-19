@@ -51,8 +51,8 @@ public class StatisticService {
     public Map<String, Integer> getPieChart() {
         Map<String, Integer> map = new TreeMap<>();
         try {
-            map.put("URL", dataBaseStatistic.getAttackedUserURL());
-            map.put("FORM", dataBaseStatistic.getAttackedUserForm());
+            map.put("перешли по ссылке", dataBaseStatistic.getAttackedUserURL());
+            map.put("заполнили форму", dataBaseStatistic.getAttackedUserForm());
         } catch (Exception e) {
             e.printStackTrace();
         }

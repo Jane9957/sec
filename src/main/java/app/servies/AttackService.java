@@ -65,7 +65,8 @@ public class AttackService {
             templateModel.put("id_profile", id_profile);
             //добавить имя пользователя
 
-            mailSevice.sendMessageUsingThymeleafTemplate(email, subject, templateModel, templateMail);
+            // убрать коммент для полного функционала
+            //mailSevice.sendMessageUsingThymeleafTemplate(email, subject, templateModel, templateMail);
         }
     }
 
